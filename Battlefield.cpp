@@ -28,7 +28,7 @@ Battlefield::~Battlefield()
 bool Battlefield::setAttributes(int r, int c, int mines)
 {
 	// returning false if invalid parameters
-	if ((r < 1) || (r > MAXROWS) || (c < 1) || (c > MAXCOLS) || (mines < 0) || (mines > (r*c)))
+	if ((r < 1) || (r > MAXROWS) || (c < 1) || (c > MAXCOLS) || (mines < 0) || (mines >= (r*c)))
 		return false;
 
 	// saving valid parameters
@@ -103,20 +103,25 @@ int Battlefield::testCell(string input)
 // displays battlefield
 void Battlefield::display()
 {
+	char index;
 	// top row;
-	cout << " ";
+	cout << "  ";
 	for (int i = 0; i < m_col; i++)
-		cout << 'A' + i << " ";
+	{
+		index = 'A' + i;
+		cout << index << " ";
+	}
 
 	cout << endl;
 
 	for (int i = 1; i <= m_row; i++)
 	{
-		cout << 'A' + i - 1;
+		index = 'A' + i - 1;
+		cout << index;
 		for (int j = 1; j <= m_col; j++)
 		{
 			if (field[i][j].isCovered())
-				cout << " ?";
+				cout << " *";
 			else
 				cout << " " << field[i][j].getAdjCount();
 		}

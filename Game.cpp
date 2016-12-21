@@ -48,6 +48,8 @@ bool Game::getAttributes()
 	cout << "How many mines should this battlefield have? ";
 	cin >> mines;
 
+	cin.ignore(10000, '\n');
+
 	return field.setAttributes(rows, cols, mines);
 }
 
@@ -56,7 +58,7 @@ void Game::play()
 {
 	string input;
 	int testVal;
-	while (!(field.hasDied()) || !(field.hasWon()))
+	while (!(field.hasDied()) && !(field.hasWon()) )
 	{
 
 		// display battlefield
@@ -100,7 +102,7 @@ void Game::play()
 	if (field.hasDied())
 	{
 		cout << endl << "GAME OVER" << endl <<
-				"-----------------------------------------------------";
+				"-----------------------------------------------------" << endl;
 		exit(1);
 	}
 
@@ -108,7 +110,7 @@ void Game::play()
 	if (field.hasWon())
 	{
 		cout << endl << "YOU WON!!!" << endl <<
-				"-----------------------------------------------------";
+				"-----------------------------------------------------" << endl;
 		exit(1);
 	}
 
